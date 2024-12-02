@@ -1,0 +1,6 @@
+name: DeekaHub
+version: '1.0-SNAPSHOT'
+main: me.deeka.deekaHub.DeekaHub
+api-version: '1.21'
+authors: [ furrygang ]
+description: femboys
