@@ -24,6 +24,7 @@ public final class DeekaHub extends JavaPlugin {
         new InventoryAPI(this).init(); // idk load ingenveotyrypaifvbegrr
         getServer().getPluginManager().registerEvents(new Listener(), this);
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord"); // i hate bungeecord but it's required
+        this.getCommand("replacemidi").setExecutor(new DeleteMidi());
     }
     public static DeekaHub getInstance() {
         return instance;

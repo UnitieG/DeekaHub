@@ -34,7 +34,7 @@ public class Listener implements org.bukkit.event.Listener {
         player.sendTitle(hex(""), hex("&fWelcome back to &d&lDeeka Network!"));
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(DeekaHub.getInstance(), new Runnable() {
             public void run() {
-                player.setPlayerListHeader(hex("\n&d&lDeeka Network\n&fYou are currently in &e&nhub&f!\n\n&fPing: &b" + player.getPing() + "\n"));
+                player.setPlayerListHeader(hex("\n&d&lDeeka Network\n&fYou are currently in &e&nhub&f!\n\n&fPing: &b" + player.getPing() + "&fms\n"));
                 player.setPlayerListName(hex("&7" + player.getName()));
                 player.setPlayerListFooter(hex("\n&b&n/discord\n\n&fPowered by &ea few cats &d&n:3\n\n&7play.deeka.me\n"));
             }

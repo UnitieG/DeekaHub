@@ -4,3 +4,7 @@ main: me.deeka.deekaHub.DeekaHub
 api-version: '1.21'
 authors: [ furrygang ]
 description: A Plugin for Deeka Network!
+commands:
+  replacemidi:
+    description: Replace MID File!
+    permission: deekahub.replacemidi
