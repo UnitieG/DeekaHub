@@ -10,11 +10,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 
 public final class DeekaHub extends JavaPlugin {
 
     private static DeekaHub instance;
 
+    File pluginsFolder = new File(getDataFolder(), "");
     @Override
     public void onEnable() {
         // Plugin startup logic
