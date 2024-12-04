@@ -38,7 +38,7 @@ public class ServerSelectorGUI extends Gui {
         SMPLore.add(hex(" &#9EDF9C│ &fBedrock Support: &aExcellent!"));
         SMPLore.add(hex(" &#9EDF9C│ &fSupported Version: &a1.21-1.21.3"));
         SMPLore.add(hex(""));
-        SMPLore.add(hex(" &e\uD83D\uDD25 &fOnline Players: &a" + DeekaHub.getPlayerCount(player, "SMP")));
+        SMPLore.add(hex(" &e\uD83D\uDD25 &fOnline Players: &a0"));
         SMPLore.add(hex(""));
         SMPLore.add(hex(" &7➜ &fLeft Click to &a&nConnect&f!"));
         SMPLore.add(hex(""));
@@ -60,7 +60,7 @@ public class ServerSelectorGUI extends Gui {
         KBFFALore.add(hex(" &#FFBD73│ &fBedrock Support: &eDecent!"));
         KBFFALore.add(hex(" &#FFBD73│ &fSupported Version: &e1.8-1.21.3"));
         KBFFALore.add(hex(""));
-        KBFFALore.add(hex(" &e\uD83D\uDD25 &fOnline Players: &e" + DeekaHub.getPlayerCount(player, "server-knockback-ffa")));
+        KBFFALore.add(hex(" &e\uD83D\uDD25 &fOnline Players: &e0"));
         KBFFALore.add(hex(""));
         KBFFALore.add(hex(" &7➜ &fLeft Click to &e&nConnect&f!"));
         KBFFALore.add(hex(""));

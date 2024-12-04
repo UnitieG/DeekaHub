@@ -11,6 +11,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
+
+import static java.lang.System.in;
 
 public final class DeekaHub extends JavaPlugin {
 
@@ -44,21 +48,6 @@ public final class DeekaHub extends JavaPlugin {
             player.sendMessage(ChatColor.RED+"Error when trying to connect to "+server);
         }
     }
-
-    public static int getPlayerCount(Player player, String server) {
-        try {
-            final ByteArrayDataOutput out = ByteStreams.newDataOutput();
-            out.writeUTF("PlayerCount");
-            out.writeUTF(server);
-            player.sendPluginMessage(getInstance(), "BungeeCord", out.toByteArray());
-        } catch (Exception e) {
-            Bukkit.getLogger().info(ChatColor.RED + "Error when trying to fetch players from " + server);
-            return 0;
-        }
-        return 0;
-    }
-
-
 
     @Override
     public void onDisable() {

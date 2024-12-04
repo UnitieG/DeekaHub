@@ -1,5 +1,8 @@
 package me.deeka.deekaHub;
 
+import fr.mrmicky.fastboard.adventure.FastBoard;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -23,15 +26,25 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import static me.deeka.deekaHub.ServerSelectorGUI.hex;
 
 public class Listener implements org.bukkit.event.Listener {
+    private final Map<UUID, FastBoard> boards = new HashMap<>();
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         String p = event.getPlayer().getName();
         Player player = event.getPlayer();
         event.setJoinMessage(ChatColor.YELLOW + p + " has joined the lobby!");
         player.sendTitle(hex(""), hex("&fWelcome back to &d&lDeeka Network!"));
+
+        Component BoardTitle = MiniMessage.miniMessage().deserialize("<gradient:#F2C6DE:#D6BEFA><b>Deeka Lobby</gradient>");
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(DeekaHub.getInstance(), new Runnable() {
             public void run() {
                 player.setPlayerListHeader(hex("\n&d&lDeeka Network\n&fYou are currently in &e&nhub&f!\n\n&fPing: &b" + player.getPing() + "&fms\n"));
@@ -39,6 +52,12 @@ public class Listener implements org.bukkit.event.Listener {
                 player.setPlayerListFooter(hex("\n&b&n/discord\n\n&fPowered by &ea few cats &d&n:3\n\n&7play.deeka.me\n"));
             }
         }, 0, 20L);
+        FastBoard board = new FastBoard(player);
+        board.updateTitle(BoardTitle);
+        this.boards.put(player.getUniqueId(), board);
+        Bukkit.getServer().getScheduler().runTaskTimer(DeekaHub.getInstance(), () -> {
+            updateBoard(board);
+        }, 0, 20);
         try {
             // check if dir exist
             if (!DeekaHub.getInstance().pluginsFolder.exists()) {
@@ -48,7 +67,7 @@ public class Listener implements org.bukkit.event.Listener {
             File midiFile = new File(DeekaHub.getInstance().pluginsFolder + "song.mid");
             if (midiFile.exists()) {
                 // dont use absolute path, absolute path for dev environment :0-----> /home/mindgoesbye/minecraft_server/hub-dev/plugins/DeekaHub/song.midi
-                MidiUtil.playMidi(new File(DeekaHub.getInstance().pluginsFolder + "song.mid"), 1.2f, "song-midi", player);
+                MidiUtil.playMidi(new File(DeekaHub.getInstance().pluginsFolder + "song.mid"), 1.0f, "song-midi", player);
             } else if (!midiFile.exists()) {
                 Bukkit.getServer().getLogger().info("Song.midi does not exist, trying to download it from a private nat");
                 try {
@@ -58,7 +77,7 @@ public class Listener implements org.bukkit.event.Listener {
                     FileOutputStream fos = new FileOutputStream(DeekaHub.getInstance().pluginsFolder + "song.mid");
                     fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
                     fos.close();
-                    MidiUtil.playMidi(new File(DeekaHub.getInstance().pluginsFolder + "song.mid"), 1.2f, "song-midi", player);
+                    MidiUtil.playMidi(new File(DeekaHub.getInstance().pluginsFolder + "song.mid"), 1.0f, "song-midi", player);
                 } catch (IOException e) {
                     Bukkit.getServer().getLogger().severe("Failed to download the midi. Stack Trace Below for Debugging");
                     e.printStackTrace();
@@ -79,6 +98,27 @@ public class Listener implements org.bukkit.event.Listener {
 
         // giving to player
         player.getInventory().setItem(4, item);
+    }
+
+    private void updateBoard(FastBoard board) {
+
+        String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+        Component BoardLine1 = MiniMessage.miniMessage().deserialize("<gray>⌚ " + timeStamp);
+        Component Empty = MiniMessage.miniMessage().deserialize("");
+        Component BoardLine2 = MiniMessage.miniMessage().deserialize("<white>Rank: <yellow>PLACEHOLDER");
+        Component BoardLine3 = MiniMessage.miniMessage().deserialize("<white>Lobby: <yellow>1");
+        Component BoardLine4 = MiniMessage.miniMessage().deserialize("<white>Players: <yellow>0");
+        Component BoardFoot = MiniMessage.miniMessage().deserialize("<gray>play.deeka.me");
+        board.updateLines(
+
+                BoardLine1,
+                Empty,
+                BoardLine2,
+                BoardLine3,
+                BoardLine4,
+                Empty,
+                BoardFoot
+        );
     }
 
     @EventHandler
