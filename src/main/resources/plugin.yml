@@ -1,9 +1,10 @@
 name: DeekaHub
-version: '1.3-DEVELOPMENT'
+version: '1.4-DEV-ENV'
 main: me.deeka.deekaHub.DeekaHub
 api-version: '1.21'
 authors: [ furrygang ]
 description: A Plugin for Deeka Network!
+website: https://github.com/UnitieG/DeekaHub
 commands:
   replacemidi:
     description: Replace MID File!

@@ -44,7 +44,7 @@ public class Listener implements org.bukkit.event.Listener {
         event.setJoinMessage(ChatColor.YELLOW + p + " has joined the lobby!");
         player.sendTitle(hex(""), hex("&fWelcome back to &d&lDeeka Network!"));
 
-        Component BoardTitle = MiniMessage.miniMessage().deserialize("<gradient:#F2C6DE:#D6BEFA><b>Deeka Lobby</gradient>");
+        Component BoardTitle = MiniMessage.miniMessage().deserialize("<gradient:#F2C6DE:#D6BEFA><b>~ Deeka Network ~</gradient>");
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(DeekaHub.getInstance(), new Runnable() {
             public void run() {
                 player.setPlayerListHeader(hex("\n&d&lDeeka Network\n&fYou are currently in &e&nhub&f!\n\n&fPing: &b" + player.getPing() + "&fms\n"));
@@ -105,9 +105,9 @@ public class Listener implements org.bukkit.event.Listener {
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         Component BoardLine1 = MiniMessage.miniMessage().deserialize("<gray>⌚ " + timeStamp);
         Component Empty = MiniMessage.miniMessage().deserialize("");
-        Component BoardLine2 = MiniMessage.miniMessage().deserialize("<white>Rank: <yellow>PLACEHOLDER");
-        Component BoardLine3 = MiniMessage.miniMessage().deserialize("<white>Lobby: <yellow>1");
-        Component BoardLine4 = MiniMessage.miniMessage().deserialize("<white>Players: <yellow>0");
+        Component BoardLine2 = MiniMessage.miniMessage().deserialize(" <#9EDF9C>│<reset> <white>Server Status:");
+        Component BoardLine3 = MiniMessage.miniMessage().deserialize(" <#9EDF9C>│<reset> <white>Survival: <#9EDF9C>Online");
+        Component BoardLine4 = MiniMessage.miniMessage().deserialize(" <#9EDF9C>│<reset> <white>KB-FFA: <#9EDF9C>Online");
         Component BoardFoot = MiniMessage.miniMessage().deserialize("<gray>play.deeka.me");
         board.updateLines(
 

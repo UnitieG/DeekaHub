@@ -23,22 +23,25 @@ public class DeleteMidi implements CommandExecutor {
             if (player.isOp()) {
                 if (args.length == 1) {
                     File midiFile = new File(DeekaHub.getInstance().pluginsFolder + "song.mid");
+                    player.sendMessage(hex("&aReplacing the MID File with: &e&n" + args[0]));
                     if (midiFile.exists()) {
-                        player.sendMessage(hex("&fReplacing the MID File with: &e&n" + args[0]));
+                        player.sendMessage(hex("&aMID Already Exist... &c&l&nDELETING..."));
+                        player.sendMessage(hex("&aDeleted Path: &e" + midiFile.getAbsolutePath()));
                         midiFile.delete();
-                        try {
-                            // donwloadm idi
-                            player.sendMessage(hex("&eDownloading..."));
-                            URL midiURL = new URL(args[0]);
-                            ReadableByteChannel rbc = Channels.newChannel(midiURL.openStream());
-                            FileOutputStream fos = new FileOutputStream(DeekaHub.getInstance().pluginsFolder + "song.mid");
-                            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-                            fos.close();
-                            player.sendMessage(hex("&eDownload successfully! Rejoin to see the effects."));
-                        } catch (IOException e) {
-                            player.sendMessage(hex("&cFailed to download the MID File."));
-                            e.printStackTrace();
-                        }
+                        player.sendMessage(hex("&cDeleted Successfully!"));
+                    }
+                    try {
+                        // donwloadm idi
+                        player.sendMessage(hex("&aDownloading..."));
+                        URL midiURL = new URL(args[0]);
+                        ReadableByteChannel rbc = Channels.newChannel(midiURL.openStream());
+                        FileOutputStream fos = new FileOutputStream(DeekaHub.getInstance().pluginsFolder + "song.mid");
+                        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+                        fos.close();
+                        player.sendMessage(hex("&eDownload successfully! Rejoin to see the effects."));
+                    } catch (IOException e) {
+                        player.sendMessage(hex("&cFailed to download the MID File."));
+                        e.printStackTrace();
                     }
                 } else if (args.length != 1) {
                     player.sendMessage(hex("&cPlease provide URI."));
